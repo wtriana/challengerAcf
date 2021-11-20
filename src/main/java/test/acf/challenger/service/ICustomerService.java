@@ -15,7 +15,6 @@ public interface ICustomerService {
 
     Boolean update(CustomerEntity customerUpdate);
 
-    //Boolean remove(Integer id);
-
+    Boolean remove(Integer id);
 
 }

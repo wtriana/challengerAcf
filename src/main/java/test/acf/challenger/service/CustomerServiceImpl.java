@@ -37,4 +37,14 @@ public class CustomerServiceImpl implements ICustomerService {
         return Boolean.FALSE;
     }
 
+    @Override
+    public Boolean remove(Integer id) {
+        if (customerRepository.findById(id).isPresent()) {
+            customerRepository.deleteById(id);
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
+    }
+
 }

@@ -36,5 +36,10 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.update(customerUpdate), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteCustomer(@PathVariable Integer id) {
+        return new ResponseEntity<>(customerService.remove(id), HttpStatus.NO_CONTENT);
+    }
+
 
 }
