@@ -31,4 +31,10 @@ public class CustomerController {
                 HttpStatus.CREATED);
     }
 
+    @PutMapping("/")
+    public ResponseEntity<Boolean> updateCustomer(@RequestBody CustomerEntity customerUpdate) {
+        return new ResponseEntity<>(customerService.update(customerUpdate), HttpStatus.OK);
+    }
+
+
 }

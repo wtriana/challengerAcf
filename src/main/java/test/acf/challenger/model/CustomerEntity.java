@@ -15,7 +15,7 @@ public class CustomerEntity {
     @Column
     private int id;
 
-    @Column(name = "\"customerId\"")
+    @Column(name = "\"customerId\"", updatable= false)
     private String customerId;
 
     @Column(name = "\"firstName\"")

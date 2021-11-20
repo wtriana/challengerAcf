@@ -13,7 +13,7 @@ public interface ICustomerService {
 
     CustomerEntity create(CustomerEntity customer);
 
-    //Boolean update(HeroEntity hero);
+    Boolean update(CustomerEntity customerUpdate);
 
     //Boolean remove(Integer id);
 

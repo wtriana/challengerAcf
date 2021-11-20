@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import test.acf.challenger.model.CustomerEntity;
 import test.acf.challenger.model.CustomerRepository;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements ICustomerService {
 
@@ -20,4 +22,19 @@ public class CustomerServiceImpl implements ICustomerService {
         LOGGER.debug("llegando a creación de Cliente");
         return customerRepository.save(customer);
     }
+
+    @Override
+    public Boolean update(CustomerEntity customerUpdate) {
+        if (customerRepository.findById(customerUpdate.getId()).isPresent()) {
+            CustomerEntity customerToUpdate = new CustomerEntity();
+            customerToUpdate.setId(customerUpdate.getId());
+            customerToUpdate.setFirstName(customerUpdate.getFirstName());
+            customerToUpdate.setSurName(customerUpdate.getSurName());
+            customerToUpdate.setCustAge(customerUpdate.getCustAge());
+            customerRepository.save(customerToUpdate);
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
 }
