@@ -11,7 +11,7 @@ public interface ICustomerService {
 
     //Optional<HeroEntity> findById(Integer id);
 
-    CustomerEntity create(CustomerEntity hero);
+    CustomerEntity create(CustomerEntity customer);
 
     //Boolean update(HeroEntity hero);
 

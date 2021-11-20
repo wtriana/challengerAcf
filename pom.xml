@@ -36,6 +36,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-43</artifactId>
+			<version>${hibernate-types.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

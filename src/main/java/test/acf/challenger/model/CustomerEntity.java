@@ -1,6 +1,10 @@
 package test.acf.challenger.model;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "customers")
@@ -11,20 +15,21 @@ public class CustomerEntity {
     @Column
     private int id;
 
-    @Column
+    @Column(name = "\"customerId\"")
     private String customerId;
 
-    @Column
+    @Column(name = "\"firstName\"")
     private String firstName;
 
-    @Column
+    @Column(name = "\"surName\"")
     private String surName;
 
-    @Column
+    @Column(name = "\"custAge\"")
     private int custAge;
 
-    @Column
-    private String creationDate;
+    @Column(name = "\"creationDate\"", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
 
     public CustomerEntity() {
     }
@@ -69,11 +74,12 @@ public class CustomerEntity {
         this.custAge = custAge;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
 }
