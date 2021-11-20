@@ -22,6 +22,11 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
+    public Optional<CustomerEntity> findById(Integer id) {
+        return customerRepository.findById(id);
+    }
+
+    @Override
     public CustomerEntity create(CustomerEntity customer) {
         return customerRepository.save(customer);
     }

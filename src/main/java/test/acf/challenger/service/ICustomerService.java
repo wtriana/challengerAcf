@@ -9,7 +9,7 @@ public interface ICustomerService {
 
     List<CustomerEntity> findAll();
 
-    //Optional<HeroEntity> findById(Integer id);
+    Optional<CustomerEntity> findById(Integer id);
 
     CustomerEntity create(CustomerEntity customer);
 

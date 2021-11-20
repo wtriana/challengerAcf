@@ -10,6 +10,7 @@ import test.acf.challenger.service.ICustomerService;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/customer")
@@ -29,6 +30,13 @@ public class CustomerController {
         List<CustomerEntity> customers = customerService.findAll();
 
         return new ResponseEntity<>(customers, customers.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<CustomerEntity>> getById(@PathVariable Integer id) {
+        Optional<CustomerEntity> customer = customerService.findById(id);
+
+        return new ResponseEntity<>(customer, customer.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/")
