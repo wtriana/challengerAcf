@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import test.acf.challenger.model.CustomerEntity;
 import test.acf.challenger.service.ICustomerService;
 
+import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin(origins = "*")
@@ -21,6 +22,13 @@ public class CustomerController {
     @GetMapping("/health")
     public String health() {
         return "Everything is fine here!";
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<CustomerEntity>> getAll() {
+        List<CustomerEntity> customers = customerService.findAll();
+
+        return new ResponseEntity<>(customers, customers.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
     @PostMapping("/")

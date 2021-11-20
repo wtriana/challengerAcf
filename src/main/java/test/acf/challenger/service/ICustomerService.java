@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ICustomerService {
 
-    //List<HeroEntity> findAll();
+    List<CustomerEntity> findAll();
 
     //Optional<HeroEntity> findById(Integer id);
 

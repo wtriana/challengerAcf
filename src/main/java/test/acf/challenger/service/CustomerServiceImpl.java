@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import test.acf.challenger.model.CustomerEntity;
 import test.acf.challenger.model.CustomerRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,11 +16,13 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    @Override
+    public List<CustomerEntity> findAll() {
+        return customerRepository.findAll();
+    }
 
     @Override
     public CustomerEntity create(CustomerEntity customer) {
-        LOGGER.debug("llegando a creación de Cliente");
         return customerRepository.save(customer);
     }
 
@@ -43,7 +46,6 @@ public class CustomerServiceImpl implements ICustomerService {
             customerRepository.deleteById(id);
             return Boolean.TRUE;
         }
-
         return Boolean.FALSE;
     }
 
