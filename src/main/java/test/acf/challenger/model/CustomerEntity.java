@@ -1,18 +1,14 @@
 package test.acf.challenger.model;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "customers")
 public class CustomerEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "\"customerId\"", updatable= false)
@@ -32,6 +28,13 @@ public class CustomerEntity {
     private Date creationDate;
 
     public CustomerEntity() {
+    }
+
+    public CustomerEntity(String customerId, String firstName, String surName, int custAge) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.surName = surName;
+        this.custAge = custAge;
     }
 
     public int getId() {
@@ -82,4 +85,15 @@ public class CustomerEntity {
         this.creationDate = creationDate;
     }
 
+    @Override
+    public String toString() {
+        return "CustomerEntity{" +
+                "id=" + id +
+                ", customerId='" + customerId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", surName='" + surName + '\'' +
+                ", custAge=" + custAge +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

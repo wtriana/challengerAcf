@@ -1,13 +1,17 @@
 package test.acf.challenger.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import test.acf.challenger.model.CustomerEntity;
 import test.acf.challenger.model.CustomerRepository;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -17,8 +21,18 @@ public class CustomerServiceImpl implements ICustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public List<CustomerEntity> findAll() {
-        return customerRepository.findAll();
+    public Map<String, Object> findAll(int page, int size) {
+        List<CustomerEntity> customers;
+        Pageable paging = PageRequest.of(page, size);
+        Page<CustomerEntity> pageCust;
+        pageCust = customerRepository.findAll(paging);
+        customers = pageCust.getContent();
+        Map<String, Object> response = new HashMap<>();
+        response.put("customers", customers);
+        response.put("currentPage", pageCust.getNumber());
+        response.put("totalItems", pageCust.getTotalElements());
+        response.put("totalPages", pageCust.getTotalPages());
+        return response;
     }
 
     @Override
