@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import test.acf.challenger.model.CustomerEntity;
 import test.acf.challenger.service.ICustomerService;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,9 +26,10 @@ public class CustomerController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CustomerEntity>> getAll() {
-        List<CustomerEntity> customers = customerService.findAll();
+    public ResponseEntity<Map<String, Object>> getAll(@RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "3") int size) {
 
+        Map<String, Object> customers = customerService.findAll( page, size );
         return new ResponseEntity<>(customers, customers.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
