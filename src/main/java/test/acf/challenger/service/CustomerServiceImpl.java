@@ -22,18 +22,20 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Map<String, Object> findAll(int page, int size) {
-        List<CustomerEntity> customers;
         Pageable paging = PageRequest.of(page, size);
         Page<CustomerEntity> pageCust;
         pageCust = customerRepository.findAll(paging);
-        customers = pageCust.getContent();
-        Map<String, Object> response = new HashMap<>();
-        response.put("customers", customers);
-        response.put("currentPage", pageCust.getNumber());
-        response.put("totalItems", pageCust.getTotalElements());
-        response.put("totalPages", pageCust.getTotalPages());
-        return response;
+        return this.mapperResult(pageCust);
     }
+
+    @Override
+    public Map<String, Object> findStringSearch(String firstName, String surName, int page, int size) {
+        Pageable paging = PageRequest.of(page,size);
+        Page<CustomerEntity> pageCust;
+        pageCust = customerRepository.findByFirstNameOrSurNameIgnoreCase( firstName, surName, paging );
+        return this.mapperResult(pageCust);
+    }
+
 
     @Override
     public Optional<CustomerEntity> findById(Integer id) {
@@ -66,6 +68,18 @@ public class CustomerServiceImpl implements ICustomerService {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    private Map<String, Object> mapperResult(Page<CustomerEntity> pageCust){
+
+        List<CustomerEntity> customers;
+        customers = pageCust.getContent();
+        Map<String, Object> response = new HashMap<>();
+        response.put("customers", customers);
+        response.put("currentPage", pageCust.getNumber());
+        response.put("totalItems", pageCust.getTotalElements());
+        response.put("totalPages", pageCust.getTotalPages());
+        return response;
     }
 
 }

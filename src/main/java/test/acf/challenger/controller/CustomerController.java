@@ -40,6 +40,16 @@ public class CustomerController {
         return new ResponseEntity<>(customer, customer.isPresent() ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/search/")
+    public ResponseEntity<Map<String, Object>> getByStringSearch(@RequestParam String firstName,
+                                                                 @RequestParam String surName,
+                                                                 @RequestParam(defaultValue = "0") int page,
+                                                                 @RequestParam(defaultValue = "3") int size) {
+
+         Map<String, Object> customers = customerService.findStringSearch(firstName, surName, page, size );
+         return new ResponseEntity<>(customers, customers.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK);
+    }
+
     @PostMapping("/")
     public ResponseEntity<CustomerEntity> createCustomer(@RequestBody CustomerEntity customer) {
         CustomerEntity customerEntity= customerService.create(customer);
